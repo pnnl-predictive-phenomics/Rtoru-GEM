@@ -40,17 +40,23 @@ jobs:
     - name: Compute Memote history on push
       run: |
         # Generate the history report on the deployment branch
-        git checkout gh-pages
         memote report history \
         --model rhodosporidium_toruloides_ifo_08804/Rhodo_Toru.xml \
         --filename="rt_history_report.html"
+
+    - name: Memote run
+      run: |
+        memote report snapshot \
+        rhodosporidium_toruloides_ifo_08804/Rhodo_Toru.xml \
+        --filename="Rt_IFO0880_release_report.html" \
+        --experimental=rhodosporidium_toruloides_ifo_08804/data/experiments.yml
 
     - name: Auto-commit results
       uses: stefanzweifel/git-auto-commit-action@v4.4.0
       with:
         commit_user_name: memote-bot
         commit_message: "chore: update memote history report"
-        file_pattern: rt_history_report.html
+        file_pattern: "*_report.html"
         branch: gh-pages
         repository: .
       env:
