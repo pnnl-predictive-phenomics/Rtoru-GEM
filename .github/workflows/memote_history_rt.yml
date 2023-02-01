@@ -30,7 +30,7 @@ jobs:
       run: |
         git config --global user.name "memote-bot"
         git checkout gh-pages
-        git checkout update_rt_model
+        git checkout main
         memote run models/rhodosporidium_toruloides_ifo_08804/Rhodo_Toru.xml \
         --location  ${{ env.MEMOTE_LOCATION }} \
         --experimental=models/rhodosporidium_toruloides_ifo_08804/data/experiments.yml
