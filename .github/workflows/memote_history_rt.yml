@@ -31,9 +31,9 @@ jobs:
         git config --global user.name "memote-bot"
         git checkout gh-pages
         git checkout main
-        memote run models/rhodosporidium_toruloides_ifo_08804/Rhodo_Toru.xml \
+        memote run rhodosporidium_toruloides_ifo_08804/Rhodo_Toru.xml \
         --location  ${{ env.MEMOTE_LOCATION }} \
-        --experimental=models/rhodosporidium_toruloides_ifo_08804/data/experiments.yml
+        --experimental=rhodosporidium_toruloides_ifo_08804/data/experiments.yml
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -42,7 +42,7 @@ jobs:
         # Generate the history report on the deployment branch
         git checkout gh-pages
         memote report history \
-        --model models/rhodosporidium_toruloides_ifo_08804/Rhodo_Toru.xml \
+        --model rhodosporidium_toruloides_ifo_08804/Rhodo_Toru.xml \
         --filename="rt_history_report.html"
 
     - name: Auto-commit results

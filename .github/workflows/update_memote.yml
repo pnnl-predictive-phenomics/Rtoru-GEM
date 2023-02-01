@@ -25,14 +25,14 @@ jobs:
         python-version: '3.10.6'
 
     - name: Install memote
-      run: pip install -r requirements.txt
+      run: pip install memote cobra
 
     - name: Memote run
       run: |
         
-        memote report snapshot models/rhodosporidium_toruloides_ifo_08804/Rhodo_Toru.xml \
+        memote report snapshot rhodosporidium_toruloides_ifo_08804/Rhodo_Toru.xml \
         --filename="gh-pages-repo/Rt_IFO0880_release_report.html" \
-        --experimental=models/rhodosporidium_toruloides_ifo_08804/data/experiments.yml
+        --experimental=rhodosporidium_toruloides_ifo_08804/data/experiments.yml
   
 
     - name: Auto-commit results
