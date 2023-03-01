@@ -2,7 +2,7 @@ name: RT model history
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", 'refactor_naming']
 jobs:
   memote-history:
     runs-on: ubuntu-latest
@@ -31,9 +31,9 @@ jobs:
         git config --global user.name "memote-bot"
         git checkout gh-pages
         git checkout main
-        memote run rhodosporidium_toruloides_ifo_08804/Rhodo_Toru.xml \
+        memote run rtoru/Rhodo_Toru.xml \
         --location  ${{ env.MEMOTE_LOCATION }} \
-        --experimental=rhodosporidium_toruloides_ifo_08804/data/experiments.yml
+        --experimental=rtoru/data/experiments.yml
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -41,15 +41,15 @@ jobs:
       run: |
         # Generate the history report on the deployment branch
         memote report history \
-        --model rhodosporidium_toruloides_ifo_08804/Rhodo_Toru.xml \
+        --model rtoru/Rhodo_Toru.xml \
         --filename="rt_history_report.html"
 
     - name: Memote run
       run: |
         memote report snapshot \
-        rhodosporidium_toruloides_ifo_08804/Rhodo_Toru.xml \
+        rtoru/Rhodo_Toru.xml \
         --filename="Rt_IFO0880_release_report.html" \
-        --experimental=rhodosporidium_toruloides_ifo_08804/data/experiments.yml
+        --experimental=rtoru/data/experiments.yml
 
     - name: Auto-commit results
       uses: stefanzweifel/git-auto-commit-action@v4.4.0
