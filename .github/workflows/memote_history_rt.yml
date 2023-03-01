@@ -30,7 +30,7 @@ jobs:
       run: |
         git config --global user.name "memote-bot"
         git checkout gh-pages
-        git checkout ${GITHUB_REF##*/}
+        git checkout ${{ github.ref_name }}
         memote run rtoru/Rhodo_Toru.xml \
         --location  ${{ env.MEMOTE_LOCATION }} \
         --experimental=rtoru/data/experiments.yml
