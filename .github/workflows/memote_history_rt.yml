@@ -46,6 +46,7 @@ jobs:
 
     - name: Memote run
       run: |
+        git checkout ${{ github.ref_name }}
         memote report snapshot \
         rtoru/Rhodo_Toru.xml \
         --filename="Rt_IFO0880_release_report.html" \
