@@ -54,8 +54,7 @@ jobs:
     - name: Compute Memote history on push
       run: |
         # Generate the history report on the deployment branch
-        memote report history \
-        --filename="${{ env.history }}"
+        memote report history --filename="${{ env.history }}"
 
     - name: Memote run
       run: |
