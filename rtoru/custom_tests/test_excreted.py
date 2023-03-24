@@ -1,5 +1,5 @@
 from memote.utils import annotate, wrapper
-from rtoru import rt, expected_metab
+from rtoru import model as rt, expected_metab
 from concerto.testing.secretion import get_excreted_metabolites
 
 

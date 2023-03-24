@@ -11,6 +11,9 @@ medium:
     no_nitrogen:
       filename: "min_media_no_nitrogen.csv"
       label: "No Nitrogen"
+    no_phosphorus:
+      filename: "min_media_no_phosh.csv"
+      label: "No Phosph"
 essentiality:
   path: "essentiality/"
   experiments:
@@ -21,12 +24,16 @@ essentiality:
 growth:
   path: "growth/"
   experiments:
-    biolog_pm1:
+    biolog_carbon:
       medium:  no_carbon
-      filename: 'pm1_pm2_biolog.csv'
-      label: "Biolog data"
-    biolog_pm3:
+      filename: 'carbon_biolog.csv'
+      label: "no_carbon data"
+    biolog_nitrogen:
       medium:     no_nitrogen
-      filename: 'pm3b_biolog.csv'
-      label: "Biolog data"
+      filename: 'nit_biolog.csv'
+      label: "no_nitrogen data"
+    biolog_phosph:
+      medium:   no_phosphorus
+      filename: 'phos_biolog.csv'
+      label: "no_phosphorus data"
 minimal_growth_rate: 0.05
