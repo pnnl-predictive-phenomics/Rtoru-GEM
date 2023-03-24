@@ -58,6 +58,8 @@ jobs:
       run: |
         # Generate the history report on the deployment branch
         memote report history --filename="${{ env.history }}"
+        git add "${{ env.history }}"
+        git commit -m 'chore: update memote history'
 
     - name: Memote run
       run: |
