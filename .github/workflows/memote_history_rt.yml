@@ -29,20 +29,13 @@ jobs:
         echo "deployment=gh-pages" >> $GITHUB_ENV
         echo "custom_tests=rtoru/custom_tests" >> $GITHUB_ENV
         echo "MEMOTE_LOCATION=results" >> $GITHUB_ENV
-        echo "PYTHONPATH=$PYTHONPATH:CONCERTO" >> $GITHUB_ENV
-
-    - name: Checkout repo for gh-pages branch
-      uses: actions/checkout@v2
-      with:
-        repository: ${{ github.repository }}
-        ref: ${{ env.deployment }}
-        path: ${{ env.other-repo }}
+        echo "PYTHONPATH=$PYTHONPATH:concerto_path" >> $GITHUB_ENV
 
     - name: Checkout concerto
       uses: actions/checkout@v2
       with:
         repository: PNNL-CompBio/CONCERTO
-        path: CONCERTO
+        path: concerto_path
 
     - name: Memote short run
       run: |
