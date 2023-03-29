@@ -36,7 +36,8 @@ jobs:
       with:
         repository: PNNL-CompBio/CONCERTO
         path: concerto_path
-    - name: Memote run
+
+    - name: Run snapshot report
       run: |
         git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
         git config --global user.name "${GITHUB_ACTOR}"
@@ -52,12 +53,17 @@ jobs:
         git checkout gh-pages
         git add "${{ env.snapshot }}"
         git commit -m 'chore: update memote snapshot'
-        
-        # now run test
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: run single point
+      run: |
+        git status
+        git pull
         git checkout ${{ github.ref_name }}
         memote run --custom-tests=${{ env.custom_tests }}
         git checkout gh-pages
-        git pull
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
