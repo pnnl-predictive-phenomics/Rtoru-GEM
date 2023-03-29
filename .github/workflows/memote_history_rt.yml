@@ -50,6 +50,8 @@ jobs:
         memote report snapshot \
         --filename="${{ env.snapshot }}" \
         --custom-tests=${{ env.custom_tests }}
+        git status
+        ls
         git checkout gh-pages
         git add "${{ env.snapshot }}"
         git commit -m 'chore: update memote snapshot'
