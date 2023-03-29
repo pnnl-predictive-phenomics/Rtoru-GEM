@@ -36,39 +36,46 @@ jobs:
       with:
         repository: PNNL-CompBio/CONCERTO
         path: concerto_path
-
-    - name: Memote short run
+    - name: Memote run
       run: |
         git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
         git config --global user.name "${GITHUB_ACTOR}"
+        # make sure gh-pages is local
         git checkout gh-pages
+        # back to main
+        git checkout ${{ github.ref_name }}
+        
+        # generate snapshot/html report of model
+        memote report snapshot \
+        --filename="${{ env.snapshot }}" \
+        --custom-tests=${{ env.custom_tests }}
+        git checkout gh-pages
+        git add "${{ env.snapshot }}"
+        git commit -m 'chore: update memote snapshot'
+        
+        # now run test
         git checkout ${{ github.ref_name }}
         memote run --custom-tests=${{ env.custom_tests }}
+        git checkout gh-pages
+        git pull
+        git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Compute Memote history on push
       run: |
-        # Generate the history report on the deployment branch
-        memote report history --filename="${{ env.history }}"
-        git add "${{ env.history }}"
-        git commit -m 'chore: update memote history'
-
-    - name: Memote run
-      run: |
         git checkout ${{ github.ref_name }}
-        memote report snapshot \
-        --filename="${{ env.snapshot }}" \
-        --custom-tests=${{ env.custom_tests }}
-        
-        mv  "${{ env.snapshot }}" tmp.html
-        git checkout gh-pages
-        mv tmp.html "${{ env.snapshot }}" 
-        git add "${{ env.snapshot }}"
+        # Generate the history report on the deployment branch
+        memote report history --filename="${{ env.history }}" \
+            --deployment gh-pages
+        git status
+        git pull
+        git add "${{ env.history }}"
         git commit -m 'chore: update memote history'
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
 #    - name: Auto-commit results
 #      uses: stefanzweifel/git-auto-commit-action@v4.4.0
