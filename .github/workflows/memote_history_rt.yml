@@ -28,7 +28,7 @@ jobs:
         echo "history=history_report.html" >> $GITHUB_ENV
         echo "deployment=gh-pages" >> $GITHUB_ENV
         echo "custom_tests=rtoru/custom_tests" >> $GITHUB_ENV
-        echo "MEMOTE_LOCATION=results" >> $GITHUB_ENV
+        echo "MEMOTE_LOCATION=Results" >> $GITHUB_ENV
         echo "PYTHONPATH=$PYTHONPATH:concerto_path" >> $GITHUB_ENV
 
     - name: Checkout concerto
