@@ -50,44 +50,42 @@ jobs:
       run: |
         pwd
         ls
-        memote run --custom-tests=${{ env.custom_tests }} -a "-q" \
-        --exclusive=test_essentiality
+        memote run --custom-tests=${{ env.custom_tests }}
+        
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-#    - name: Compute Memote history on push
-#      run: |
-#        git checkout ${{ github.ref_name }}
-#        # Generate the history report on the deployment branch
-#        memote report history --filename="${{ env.history }}" \
-#            --deployment gh-pages
-#        git status
-#        git pull
-##        git add "${{ env.history }}"
-##        git commit -m 'chore: update memote history'
-##        git push
-#      env:
-#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Compute Memote history on push
+      run: |
+        git checkout ${{ github.ref_name }}
+        # Generate the history report on the deployment branch
+        memote report history --filename="${{ env.history }}" \
+            --deployment gh-pages
+        git checkout gh-pages
+        git add "${{ env.history }}"
+        git commit -m 'chore: update memote history'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-#    - name: Run snapshot report
-#      run: |
-#        git pull
-#        git status
-#        git checkout ${{ github.ref_name }}
-#        # generate snapshot/html report of model
-#        memote report snapshot \
-#        --filename="${{ env.snapshot }}" \
-#        --custom-tests=${{ env.custom_tests }}
-#        git branch
-#        git status
-#        ls
-#        git checkout gh-pages
-#        git add "${{ env.snapshot }}" "${{ env.history }}"
-#        git commit -m 'chore: update memote snapshot'
-#        git push
-#      env:
-#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Run snapshot report
+      run: |
+        git pull
+        git status
+        git checkout ${{ github.ref_name }}
+        # generate snapshot/html report of model
+        memote report snapshot \
+        --filename="${{ env.snapshot }}" \
+        --custom-tests=${{ env.custom_tests }}
+        git branch
+        git status
+        ls
+        git checkout gh-pages
+        git add "${{ env.snapshot }}"
+        git commit -m 'chore: update memote snapshot'
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
 
