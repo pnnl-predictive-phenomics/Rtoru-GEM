@@ -3,7 +3,4 @@
 concerto_path
 
 # data not ready for public eye
-./rtoru/data/excreted/source/
-.\rtoru\data\excreted\source
-\rtoru\data\excreted\source
-
+rtoru/data/excreted/source/
