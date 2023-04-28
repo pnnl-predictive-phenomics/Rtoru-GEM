@@ -22,6 +22,8 @@ EX_peamn_e,False,10
 EX_tym_e,True,10
 EX_gam_e,True,10
 EX_acgam_e,False,10
+EX_acgal_e,False,10
+EX_acmana_e,False,10
 EX_ade_e,True,10
 EX_adn_e,True,10
 EX_cytd_e,True,10
